@@ -20,6 +20,38 @@ function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
         tempGrid[row][col].isOn = !tempGrid[row][col].isOn;
         setGrid(tempGrid);
     }
+
+    function flipCurrentAndAdjacent(row: number, col: number) {
+        // debugger;
+        let tempGrid = [...grid];
+
+        // selected cell
+        tempGrid[row][col].isOn = !tempGrid[row][col].isOn;
+
+        // cell on top
+        debugger;
+        if (row - 1 >= 0) {
+            tempGrid[row - 1][col].isOn = !tempGrid[row - 1][col].isOn;
+        }
+
+        // cell to the right
+        if (col + 1 < cols) {
+            tempGrid[row][col + 1].isOn = !tempGrid[row][col + 1].isOn;
+        }
+
+        // cell under
+        if (row + 1 < rows) {
+            tempGrid[row + 1][col].isOn = !tempGrid[row + 1][col].isOn;
+        }
+
+        // cell to the right
+        if (col - 1 >= 0) {
+            tempGrid[row][col - 1].isOn = !tempGrid[row][col - 1].isOn;
+        }
+
+        setGrid(tempGrid);
+    }
+
     useEffect(
         function initialiseGrid() {
             let grid: Array<Array<Cell>> = [];
@@ -40,11 +72,13 @@ function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
         <div className="grid">
             {grid.map((row, y) => {
                 return (
-                    <div className="row">
+                    <div key={uuid()} className="row">
                         {row.map((cell, x) => {
                             return (
                                 <LightsOutCell
-                                    handleOnClick={() => handleOnClick(x, y)}
+                                    handleOnClick={() =>
+                                        flipCurrentAndAdjacent(y, x)
+                                    }
                                     key={uuid()}
                                     isOn={grid[y][x].isOn}
                                 />
