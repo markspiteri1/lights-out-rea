@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import LightsOutCell, { CellProps } from '../LightsOutCell/LightsOutCell';
 
 import './LightsOutGrid.scss';
+import Cell from './LightsOutGrid.models';
 
 interface GridProps {
     rows?: Number;
@@ -13,18 +14,20 @@ interface GridProps {
 function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
     const [grid, setGrid] = useState<Array<Array<CellProps>>>([[]]);
 
-    function handleOnClick(x: number, y: number) {
-        console.log('X:' + x + ' Y:' + y);
+    function handleOnClick(col: number, row: number) {
+        console.log('X:' + col + ' Y:' + row);
+        let tempGrid = [...grid];
+        tempGrid[row][col].isOn = !tempGrid[row][col].isOn;
+        setGrid(tempGrid);
     }
     useEffect(
         function initialiseGrid() {
-            let grid: Array<Array<CellProps>> = [];
+            let grid: Array<Array<Cell>> = [];
             for (let x = 0; x < rows; x++) {
                 grid[x] = [];
                 for (let y = 0; y < cols; y++) {
                     grid[x][y] = {
                         isOn: true,
-                        handleOnClick: () => handleOnClick(x, y),
                     };
                 }
             }
@@ -41,7 +44,7 @@ function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
                         {row.map((cell, x) => {
                             return (
                                 <LightsOutCell
-                                    handleOnClick={() => alert('ff')}
+                                    handleOnClick={() => handleOnClick(x, y)}
                                     key={uuid()}
                                     isOn={grid[y][x].isOn}
                                 />

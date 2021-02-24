@@ -4,7 +4,7 @@ import './LightsOutCell.scss';
 
 export interface CellProps {
     isOn: boolean;
-    handleOnClick: () => void;
+    handleOnClick?: () => void;
 }
 
 function LightsOutCell(props: CellProps) {
