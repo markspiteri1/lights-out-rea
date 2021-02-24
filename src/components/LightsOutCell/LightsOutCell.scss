@@ -1,0 +1,16 @@
+.gridcell {
+  height: 35px;
+  width: 35px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.off {
+  background: radial-gradient(
+    circle,
+    rgba(142, 250, 142, 1) 29%,
+    rgba(31, 98, 31, 1) 100%
+  );
+}
+.on {
+  background-color: red;
+}
