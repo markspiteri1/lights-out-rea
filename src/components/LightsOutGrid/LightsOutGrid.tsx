@@ -14,22 +14,13 @@ interface GridProps {
 function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
     const [grid, setGrid] = useState<Array<Array<CellProps>>>([[]]);
 
-    function handleOnClick(col: number, row: number) {
-        console.log('X:' + col + ' Y:' + row);
-        let tempGrid = [...grid];
-        tempGrid[row][col].isOn = !tempGrid[row][col].isOn;
-        setGrid(tempGrid);
-    }
-
     function flipCurrentAndAdjacent(row: number, col: number) {
-        // debugger;
         let tempGrid = [...grid];
 
         // selected cell
         tempGrid[row][col].isOn = !tempGrid[row][col].isOn;
 
         // cell on top
-        debugger;
         if (row - 1 >= 0) {
             tempGrid[row - 1][col].isOn = !tempGrid[row - 1][col].isOn;
         }
@@ -70,23 +61,28 @@ function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
 
     return (
         <div className="grid">
-            {grid.map((row, y) => {
-                return (
-                    <div key={uuid()} className="row">
-                        {row.map((cell, x) => {
-                            return (
-                                <LightsOutCell
-                                    handleOnClick={() =>
-                                        flipCurrentAndAdjacent(y, x)
-                                    }
-                                    key={uuid()}
-                                    isOn={grid[y][x].isOn}
-                                />
-                            );
-                        })}
-                    </div>
-                );
-            })}
+            <h1>Lights Out</h1>
+            <div className="grid-container">
+                <div className="grid-container-cells">
+                    {grid.map((row, y) => {
+                        return (
+                            <div key={uuid()} className="grid-container-cells-row">
+                                {row.map((cell, x) => {
+                                    return (
+                                        <LightsOutCell
+                                            handleOnClick={() =>
+                                                flipCurrentAndAdjacent(y, x)
+                                            }
+                                            key={uuid()}
+                                            isOn={grid[y][x].isOn}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
         </div>
     );
 }

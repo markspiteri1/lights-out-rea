@@ -12,7 +12,7 @@ function LightsOutCell(props: CellProps) {
 
     return (
         <div
-            className={clsx('gridcell', isOn ? 'on' : 'off')}
+            className={clsx('gridcell', 'animate', isOn ? 'on' : 'off')}
             onClick={handleOnClick}
         />
     );

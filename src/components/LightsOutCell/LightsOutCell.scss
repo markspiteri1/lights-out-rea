@@ -1,12 +1,15 @@
 .gridcell {
-    height: 35px;
-    width: 35px;
-    border-radius: 6px;
+    height: 55px;
+    width: 55px;
+    border-radius: 4px;
     cursor: pointer;
     margin: 1px;
+
+    &:hover {
+        opacity: 0.5;
+    }
 }
 .off {
-    transition: background-color 1000ms linear;
     background: radial-gradient(
         circle,
         rgba(142, 250, 142, 1) 29%,
@@ -15,6 +18,9 @@
 }
 
 .on {
-    transition: background-color 1000ms linear;
     background-color: rgba(31, 98, 31, 1);
+}
+
+.animate {
+    transition: background-color 4s;
 }

@@ -1,3 +1,19 @@
-.row {
+.grid{
     display: flex;
+    flex-direction: column;
+    text-align: center;
+    h1 {
+        font-family: 'Arial';
+        margin: 50px 0
+    }
+    
+    &-container {
+        display: flex;
+        justify-content: center;
+        
+        &-cells-row {
+            display: flex;
+        }
+    }
+    
 }
