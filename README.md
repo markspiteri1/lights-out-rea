@@ -2,7 +2,7 @@
 
 ## Installation
 
-Upon cloning the solution or downloading the source code from this link https://github.com/markspiteri1/lights-out-rea, run the following command to install all the required dependencies
+Upon cloning the solution or downloading the source code from this link https://github.com/markspiteri1/lights-out-react.git, run the following command to install all the required dependencies
 ```
 npm install
 ```
