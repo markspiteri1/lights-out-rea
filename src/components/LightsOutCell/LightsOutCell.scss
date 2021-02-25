@@ -9,7 +9,7 @@
         opacity: 0.5;
     }
 }
-.off {
+.on {
     background: radial-gradient(
         circle,
         rgba(142, 250, 142, 1) 29%,
@@ -17,7 +17,7 @@
     );
 }
 
-.on {
+.off {
     background-color: rgba(31, 98, 31, 1);
 }
 

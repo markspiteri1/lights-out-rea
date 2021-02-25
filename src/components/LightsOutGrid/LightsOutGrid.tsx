@@ -11,7 +11,7 @@ interface GridProps {
     cols?: Number;
 }
 
-function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
+function LightsOutGrid({ rows = 1, cols = 2 }: GridProps) {
     const [grid, setGrid] = useState<Array<Array<CellProps>>>([[]]);
 
     function flipCurrentAndAdjacent(row: number, col: number) {
@@ -50,7 +50,7 @@ function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
                 grid[x] = [];
                 for (let y = 0; y < cols; y++) {
                     grid[x][y] = {
-                        isOn: true,
+                        isOn: false,
                     };
                 }
             }
@@ -59,30 +59,56 @@ function LightsOutGrid({ rows = 5, cols = 5 }: GridProps) {
         [cols, rows]
     );
 
+    const isGameWon = (): boolean => {
+        if (!grid){
+            return false
+        }
+        for (let x = 0; x < rows; x++) {
+            for (let y = 0; y < cols; y++) {
+                if (!grid[x][y]?.isOn) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
     return (
         <div className="grid">
-            <h1>Lights Out</h1>
-            <div className="grid-container">
-                <div className="grid-container-cells">
-                    {grid.map((row, y) => {
-                        return (
-                            <div key={uuid()} className="grid-container-cells-row">
-                                {row.map((cell, x) => {
-                                    return (
-                                        <LightsOutCell
-                                            handleOnClick={() =>
-                                                flipCurrentAndAdjacent(y, x)
-                                            }
-                                            key={uuid()}
-                                            isOn={grid[y][x].isOn}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
+            {!isGameWon() ? (
+                <>
+                    <h1>Lights Out</h1>
+                    <div className="grid-container">
+                        <div className="grid-container-cells">
+                            {grid.map((row, y) => {
+                                return (
+                                    <div
+                                        key={uuid()}
+                                        className="grid-container-cells-row"
+                                    >
+                                        {row.map((cell, x) => {
+                                            return (
+                                                <LightsOutCell
+                                                    handleOnClick={() =>
+                                                        flipCurrentAndAdjacent(
+                                                            y,
+                                                            x
+                                                        )
+                                                    }
+                                                    key={uuid()}
+                                                    isOn={grid[y][x].isOn}
+                                                />
+                                            );
+                                        })}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <h1>Congratulations! You have won!</h1>
+            )}
         </div>
     );
 }
